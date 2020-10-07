@@ -1,9 +1,12 @@
 package com.example.school.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,22 +26,28 @@ public class Subject {
 	private double maths;
 	private double chemistry;
 	private double physics;
-	private String rollNumber;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "studentId", nullable = false)
+	private Student student;
 	private String year;
 
 	public Subject() {
 	}
 
-	public Subject(double english, double hindi, double maths, double chemistry, double physics, String rollNumber,
-			String year) {
+	
+
+	public Subject( double english, double hindi, double maths, double chemistry, double physics,
+			Student student, String year) {
 		this.english = english;
 		this.hindi = hindi;
 		this.maths = maths;
 		this.chemistry = chemistry;
 		this.physics = physics;
-		this.rollNumber = rollNumber;
+		this.student = student;
 		this.year = year;
 	}
+
+
 
 	public long getSubjectId() {
 		return subjectId;
@@ -88,13 +97,19 @@ public class Subject {
 		this.physics = physics;
 	}
 
-	public String getRollNumber() {
-		return rollNumber;
+	
+
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setRollNumber(String rollNumber) {
-		this.rollNumber = rollNumber;
+
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
+
+
 
 	public String getYear() {
 		return year;

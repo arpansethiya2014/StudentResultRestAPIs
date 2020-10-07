@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import com.example.school.entity.Subject;
+import com.example.school.service.StudentService;
 import com.example.school.service.SubjectService;
 
 @RestController
@@ -19,12 +20,15 @@ public class SubjectController {
 	@Autowired
 	private SubjectService subjectService;
 	
-	@PostMapping("/save")
-	public String saveSubject(@RequestBody Subject subject) {
-		return subjectService.findByRollNo(subject.getRollNumber()).map(p ->{
-			subjectService.save(subject);
-			return "Save Roll Number Marks : " + subject.getRollNumber();
-		}).orElseThrow(() -> new RuntimeException(" Roll Number Not Found : " + subject.getRollNumber()));
+	@Autowired
+	private StudentService studentService; 
+	
+	@PostMapping("/save/{studentId}")
+	public Subject saveSubject(@PathVariable("studentId") long studentId,  @RequestBody Subject subject) {
+		return studentService.findById(studentId).map(p -> {
+			subject.setStudent(p);
+			return subjectService.save(subject);
+		}).orElseThrow(() -> new RuntimeException(" Student Id : " + studentId + " Not Found"));
 	}
 	
 	@DeleteMapping("/delete")
@@ -39,4 +43,6 @@ public class SubjectController {
 	public List<Subject> findAll(){
 		return subjectService.findAll();
 	}
+	
+	
 }

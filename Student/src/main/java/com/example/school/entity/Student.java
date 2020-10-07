@@ -37,6 +37,12 @@ public class Student {
 	
 	
 	
+	public Student(long studentId) {
+		this.studentId = studentId;
+	}
+
+
+
 	public Student() {
 	}
 

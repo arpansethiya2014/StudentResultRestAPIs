@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.example.school.entity.Student;
-import com.example.school.entity.StudentDTO;
 
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Long> {
@@ -16,6 +15,6 @@ public interface StudentRepo extends JpaRepository<Student, Long> {
 	Optional<Student> findByRollNo(String rollNumber);
 
 	@Query(value = "Select st.name,st.email,st.roll_number,st.student_class,sc.english,sc.hindi,sc.maths,sc.physics,sc.chemistry from student st Inner join subject sc on sc.roll_number=st.roll_number where st.roll_Number=? or st.name=?", nativeQuery = true)
-	List<StudentDTO> findByValue(String rollNumber);
+	List<Student> findByValue(String rollNumber);
 
 }
