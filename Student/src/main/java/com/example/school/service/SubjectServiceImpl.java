@@ -16,9 +16,6 @@ public class SubjectServiceImpl implements SubjectService {
 	@Autowired
 	private SubjectRepo subjectRepo;
 	
-	@Autowired
-	private StudentRepo studentRepo;
-
 	@Override
 	public Subject save(Subject subject) {
 		return subjectRepo.save(subject);
@@ -40,8 +37,8 @@ public class SubjectServiceImpl implements SubjectService {
 	}
 
 	@Override
-	public Optional<Student> findByRollNo(String rollno) {
-		return studentRepo.findByRollNo(rollno);
+	public Optional<Subject> findByRollNo(String rollno) {
+		return subjectRepo.findByRollNo(rollno);
 	}
 	
 	

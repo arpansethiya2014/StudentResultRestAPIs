@@ -48,4 +48,10 @@ public class SubjectController {
 	public Subject findBySubId(@PathVariable("subjectId") long subjectId) {
 		return subjectService.findById(subjectId).orElseThrow(() -> new RuntimeException(" Subject Id : " + subjectId + " Not Found"));
 	}
+	
+	@GetMapping("/findByRollNo/{rollNo}")
+	public Subject findByRollNo(@PathVariable("rollNo") String rollNo) {
+		return subjectService.findByRollNo(rollNo).orElseThrow(() -> new RuntimeException(" Roll Number  : " + rollNo + " Result Not Found"));
+	}
+	
 }

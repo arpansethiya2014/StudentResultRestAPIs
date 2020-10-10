@@ -16,6 +16,6 @@ public interface SubjectService {
 
 	List<Subject> findAll();
 	
-	Optional<Student> findByRollNo(String rollno);
+	Optional<Subject> findByRollNo(String rollno);
 
 }
