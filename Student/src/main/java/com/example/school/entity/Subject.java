@@ -26,7 +26,7 @@ public class Subject {
 	private double maths;
 	private double chemistry;
 	private double physics;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "studentId", nullable = false)
 	private Student student;
 	private String year;

@@ -31,7 +31,7 @@ public class SubjectController {
 		}).orElseThrow(() -> new RuntimeException(" Student Id : " + studentId + " Not Found"));
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete/{subjectId}")
 	public String deleteSubject(@PathVariable("subjectId") long id) {
 		return subjectService.findById(id).map(p ->{
 			subjectService.deleteById(id);
@@ -44,5 +44,8 @@ public class SubjectController {
 		return subjectService.findAll();
 	}
 	
-	
+	@GetMapping("/findById/{subjectId}")
+	public Subject findBySubId(@PathVariable("subjectId") long subjectId) {
+		return subjectService.findById(subjectId).orElseThrow(() -> new RuntimeException(" Subject Id : " + subjectId + " Not Found"));
+	}
 }
